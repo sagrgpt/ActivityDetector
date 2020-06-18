@@ -1,4 +1,4 @@
-package com.example.csvwriter;
+package com.example.filewriter;
 
 import java.io.File;
 

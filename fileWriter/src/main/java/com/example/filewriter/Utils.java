@@ -1,4 +1,4 @@
-package com.example.csvwriter;
+package com.example.filewriter;
 
 import java.util.ArrayList;
 import java.util.List;

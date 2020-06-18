@@ -1,6 +1,5 @@
-package com.example.csvwriter;
+package com.example.filewriter;
 
-import android.os.Environment;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -21,23 +20,14 @@ public class CsvWriter {
     /**
      * It is used to create a csv file by processing the data received from the user.
      *
-     * @param fileName     Name of will create file
      * @param headerList   Header list of csv file
      * @param data         List of csv data
      * @param fileCallback Callback of file
      */
-    public void createCsvFile(String fileName,
+    public void createCsvFile(File file,
                               List<String> headerList,
                               List<String> data,
                               final FileCallback fileCallback) {
-        fileName = fileName
-              .replace(" ", "_")
-              .replace(":", "_");
-
-        file = new File(Environment.getExternalStorageDirectory() +
-                        File.separator +
-                        fileName +
-                        ".csv");
         outputStream = null;
 
         try {
