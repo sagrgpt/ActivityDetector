@@ -1,2 +1,3 @@
+include ':csvWriter'
 include ':app'
 rootProject.name = "ActivityDetector"
