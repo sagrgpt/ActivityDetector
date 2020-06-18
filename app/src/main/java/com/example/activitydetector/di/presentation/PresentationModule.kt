@@ -2,6 +2,7 @@ package com.example.activitydetector.di.presentation
 
 import android.app.Activity
 import android.content.Context
+import com.example.activitydetector.sensors.PermissionUtility
 import dagger.Module
 import dagger.Provides
 
@@ -16,6 +17,11 @@ class PresentationModule(private val mActivity: Activity) {
     @Provides
     fun getContext(activity: Activity): Context {
         return activity
+    }
+
+    @Provides
+    fun getPermissionUtility(): PermissionUtility {
+        return PermissionUtility()
     }
 
 }

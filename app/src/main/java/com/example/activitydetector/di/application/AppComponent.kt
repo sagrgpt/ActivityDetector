@@ -9,7 +9,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        ApplicationModule::class/*,
+        ApplicationModule::class,
+        SharedPrefModule::class/*,
         ViewModelFactoryModule::class*/
     ]
 )

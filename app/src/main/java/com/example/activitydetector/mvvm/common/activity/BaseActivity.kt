@@ -9,7 +9,7 @@ import com.example.activitydetector.mvvm.common.application.BaseApplication
 
 open class BaseActivity : AppCompatActivity() {
 
-    var isInjectorUsed = false
+    private var isInjectorUsed = false
 
     @UiThread
     fun getComponent(): PresentationComponent {

@@ -1,7 +1,8 @@
 package com.example.activitydetector.di.application
 
 import android.app.Application
-import com.example.activitydetector.cache.SharedPrefManager
+import com.example.activitydetector.schedulers.DefaultScheduler
+import com.example.activitydetector.schedulers.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -16,8 +17,8 @@ class ApplicationModule(private val application: Application) {
 
     @Singleton
     @Provides
-    fun getCacheStorage(context: Application): SharedPrefManager {
-        return SharedPrefManager(context)
+    fun getScheduler(): SchedulerProvider {
+        return DefaultScheduler()
     }
 
 }
