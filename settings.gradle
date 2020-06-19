@@ -1,3 +1,4 @@
+include ':sensorDataGenerator'
 include ':fileWriter'
 include ':app'
 rootProject.name = "ActivityDetector"

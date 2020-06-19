@@ -5,7 +5,8 @@ import dagger.Subcomponent
 
 @Subcomponent(
     modules = [
-        SensorModule::class
+        SensorModule::class,
+        SensorDataGeneratorModule::class
     ]
 )
 interface ServiceComponent {

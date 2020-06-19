@@ -10,8 +10,8 @@ import android.os.IBinder
 import com.example.activitydetector.R
 import com.example.activitydetector.cache.PreferenceConstants
 import com.example.activitydetector.cache.SharedPrefManager
+import com.example.activitydetector.mvvm.common.PermissionUtility
 import com.example.activitydetector.mvvm.common.activity.BaseActivity
-import com.example.activitydetector.sensors.PermissionUtility
 import kotlinx.android.synthetic.main.activity_sensor.*
 import timber.log.Timber
 import javax.inject.Inject

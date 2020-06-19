@@ -12,10 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvWriter {
-    private File file;
     private OutputStream outputStream;
     private String separatorColumn = ",";
-    private String seperatorLine = "\r\n";
+    private String separatorLine = "\r\n";
 
     /**
      * It is used to create a csv file by processing the data received from the user.
@@ -24,6 +23,7 @@ public class CsvWriter {
      * @param data         List of csv data
      * @param fileCallback Callback of file
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void createCsvFile(File file,
                               List<String> headerList,
                               List<String> data,
@@ -37,15 +37,13 @@ public class CsvWriter {
         }
 
         List<String> headerListWithComma = Utils.separatorReplace(separatorColumn,
-                                                                  seperatorLine,
+                                                                  separatorLine,
                                                                   headerList);
         List<String> dataListWithComma = Utils.separatorReplace(separatorColumn,
-                                                                seperatorLine,
+                                                                separatorLine,
                                                                 data);
 
-        file = writeDataToFile(file,
-                               containAllData(headerListWithComma, dataListWithComma),
-                               fileCallback);
+        writeDataToFile(file, containAllData(headerListWithComma, dataListWithComma), fileCallback);
 
         fileCallback.onSuccess(file);
     }
@@ -59,10 +57,10 @@ public class CsvWriter {
     }
 
     /**
-     * Sets the line delimiter character(s) to be used (default: {@link CsvWriter#seperatorLine}).
+     * Sets the line delimiter character(s) to be used (default: {@link CsvWriter#separatorLine}).
      */
-    public void setSeperatorLine(String seperatorLine) {
-        this.seperatorLine = seperatorLine;
+    public void setSeparatorLine(String separatorLine) {
+        this.separatorLine = separatorLine;
     }
 
     /**
@@ -70,7 +68,7 @@ public class CsvWriter {
      * @param dataList     List of csv data
      * @param fileCallback Callback of file
      */
-    private File writeDataToFile(final File file,
+    private void writeDataToFile(final File file,
                                  List<String> dataList,
                                  final FileCallback fileCallback) {
 
@@ -117,15 +115,10 @@ public class CsvWriter {
                           }
                       }
                   });
-
-            return file;
-
         }
         else {
             fileCallback.onFail("Couldn't create CSV file");
         }
-
-        return file;
     }
 
     /**
@@ -136,13 +129,8 @@ public class CsvWriter {
      */
     private List<String> containAllData(List<String> headerList, List<String> dataList) {
         List<String> stringList = new ArrayList<>();
-        for (String value : headerList) {
-            stringList.add(value);
-        }
-        for (String value : dataList) {
-            stringList.add(value);
-        }
-
+        stringList.addAll(headerList);
+        stringList.addAll(dataList);
         return stringList;
     }
 }

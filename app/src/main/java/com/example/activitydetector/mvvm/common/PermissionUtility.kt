@@ -1,4 +1,4 @@
-package com.example.activitydetector.sensors
+package com.example.activitydetector.mvvm.common
 
 import android.app.Activity
 import android.content.pm.PackageManager

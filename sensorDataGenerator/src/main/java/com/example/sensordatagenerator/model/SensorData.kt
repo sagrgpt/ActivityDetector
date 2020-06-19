@@ -1,4 +1,4 @@
-package com.example.activitydetector.sensors
+package com.example.sensordatagenerator.model
 
 data class SensorData(
     val x: Float = 0f,
@@ -7,11 +7,3 @@ data class SensorData(
     val timestamp: Long,
     val accuracy: Accuracy = Accuracy.UNKNOWN
 )
-
-enum class Accuracy {
-    UNRELIABLE,
-    HIGH,
-    LOW,
-    MEDIUM,
-    UNKNOWN
-}

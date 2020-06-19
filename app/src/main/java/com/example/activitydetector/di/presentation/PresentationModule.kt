@@ -2,7 +2,7 @@ package com.example.activitydetector.di.presentation
 
 import android.app.Activity
 import android.content.Context
-import com.example.activitydetector.sensors.PermissionUtility
+import com.example.activitydetector.mvvm.common.PermissionUtility
 import dagger.Module
 import dagger.Provides
 

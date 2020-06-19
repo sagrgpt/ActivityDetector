@@ -1,4 +1,4 @@
-package com.example.activitydetector.schedulers
+package com.example.sensordatagenerator.interfaces
 
 import io.reactivex.rxjava3.core.Scheduler
 

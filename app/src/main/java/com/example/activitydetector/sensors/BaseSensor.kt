@@ -5,14 +5,17 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import com.example.sensordatagenerator.interfaces.SensorReader
+import com.example.sensordatagenerator.model.Accuracy
+import com.example.sensordatagenerator.model.SensorData
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.PublishSubject
 import timber.log.Timber
 
-abstract class SensorReader(
+abstract class BaseSensor(
     context: Context,
     val sensorType: Int
-) : SensorEventListener {
+) : SensorReader, SensorEventListener {
 
     private val sensorManager = (context.getSystemService(Context.SENSOR_SERVICE)
         as SensorManager)
@@ -32,7 +35,7 @@ abstract class SensorReader(
     }
 
 
-    fun start(): Observable<SensorData> {
+    override fun start(): Observable<SensorData> {
         sensorManager.registerListener(
             this,
             mSensor,
@@ -41,7 +44,7 @@ abstract class SensorReader(
         return publishSubject
     }
 
-    fun stop() {
+    override fun stop() {
         sensorManager.unregisterListener(this)
         Timber.v("Listener Unregistered")
         publishSubject.onComplete()

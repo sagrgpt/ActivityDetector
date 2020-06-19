@@ -1,8 +1,8 @@
 package com.example.activitydetector.di.application
 
 import android.app.Application
-import com.example.activitydetector.schedulers.DefaultScheduler
-import com.example.activitydetector.schedulers.SchedulerProvider
+import com.example.activitydetector.mvvm.common.DefaultScheduler
+import com.example.sensordatagenerator.interfaces.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

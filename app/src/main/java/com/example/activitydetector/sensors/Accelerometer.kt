@@ -3,10 +3,11 @@ package com.example.activitydetector.sensors
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
+import com.example.sensordatagenerator.model.SensorData
 
-class AccelerometerReader(
+class Accelerometer(
     context: Context
-) : SensorReader(
+) : BaseSensor(
     context,
     Sensor.TYPE_ACCELEROMETER
 ) {

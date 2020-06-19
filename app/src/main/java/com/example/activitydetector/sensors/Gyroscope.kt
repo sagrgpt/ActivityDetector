@@ -4,9 +4,9 @@ import android.app.Application
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 
-class GyroscopeReader(
+class Gyroscope(
     application: Application
-) : SensorReader(
+) : BaseSensor(
     application,
     Sensor.TYPE_GYROSCOPE
 ) {
