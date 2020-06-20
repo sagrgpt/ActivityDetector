@@ -32,6 +32,7 @@ public class CsvWriter {
 
         try {
             file.createNewFile();
+            file.setReadable(true);
         } catch (IOException e) {
             fileCallback.onFail(e.getMessage());
         }

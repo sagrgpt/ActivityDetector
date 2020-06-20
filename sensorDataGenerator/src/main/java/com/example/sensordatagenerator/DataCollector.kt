@@ -20,8 +20,10 @@ class DataCollector(
     private val startTime = Calendar.getInstance().timeInMillis
     private val accelerometerFilename = "accelerometer_$startTime.csv"
     private val gyroscopeFilename = "gyroscope_$startTime.csv"
+    private var activityType: String = "unknown"
 
-    fun startCollection() {
+    fun startCollection(activityType: String) {
+        this.activityType = activityType
         startAccelerometerCollection()
         startGyroscopeCollection()
     }
@@ -54,10 +56,14 @@ class DataCollector(
     }
 
     private fun observeAccelerometerReadings(data: SensorData) {
-        accelerometerRecorder.record(data)
+        accelerometerRecorder.record(
+            data.copy(activityType = activityType)
+        )
     }
 
     private fun observeGyroReadings(data: SensorData) {
-        gyroscopeRecorder.record(data)
+        gyroscopeRecorder.record(
+            data.copy(activityType = activityType)
+        )
     }
 }

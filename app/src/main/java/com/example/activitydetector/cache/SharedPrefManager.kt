@@ -27,11 +27,11 @@ class SharedPrefManager(appContext: Context) {
         return prefs.contains(key)
     }
 
-    fun getString(key: String?, defValue: String?): String? {
-        return prefs.getString(key, defValue)
+    fun getString(key: String?, defValue: String?): String {
+        return prefs.getString(key, defValue) ?: ""
     }
 
-    fun getString(key: String?): String? {
+    fun getString(key: String?): String {
         return getString(key, null)
     }
 

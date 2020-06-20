@@ -2,9 +2,14 @@ package com.example.activitydetector.di.presentation
 
 import android.app.Activity
 import android.content.Context
-import com.example.activitydetector.mvvm.common.PermissionUtility
+import com.example.activitydetector.di.ActivityScope
+import com.example.activitydetector.mvvm.adapter.FileListAdapter
+import com.example.activitydetector.utility.FileManager
+import com.example.activitydetector.utility.PermissionUtility
+import com.example.activitydetector.utility.ShareUtility
 import dagger.Module
 import dagger.Provides
+import io.reactivex.rxjava3.subjects.PublishSubject
 
 @Module
 class PresentationModule(private val mActivity: Activity) {
@@ -24,4 +29,25 @@ class PresentationModule(private val mActivity: Activity) {
         return PermissionUtility()
     }
 
+    @Provides
+    fun getFileManger(application: Context): FileManager {
+        return FileManager(application)
+    }
+
+    @Provides
+    fun getShareUtility(application: Context): ShareUtility {
+        return ShareUtility(application)
+    }
+
+    @ActivityScope
+    @Provides
+    fun getItemClickListener(): PublishSubject<String> {
+        return PublishSubject.create()
+    }
+
+    @ActivityScope
+    @Provides
+    fun getFileListAdapter(clickListener: PublishSubject<String>): FileListAdapter {
+        return FileListAdapter { clickListener.onNext(it) }
+    }
 }

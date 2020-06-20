@@ -5,5 +5,6 @@ data class SensorData(
     val y: Float = 0f,
     val z: Float = 0f,
     val timestamp: Long,
-    val accuracy: Accuracy = Accuracy.UNKNOWN
+    val accuracy: Accuracy = Accuracy.UNKNOWN,
+    val activityType: String = ""
 )

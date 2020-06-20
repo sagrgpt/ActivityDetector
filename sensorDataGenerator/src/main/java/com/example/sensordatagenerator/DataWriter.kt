@@ -9,7 +9,7 @@ class DataWriter(
     private val csvWriter: CsvWriter
 ) {
 
-    private val header: List<String> = listOf("Timestamp|X|Y|Z/")
+    private val header: List<String> = listOf("Timestamp|X|Y|Z|Activity/")
 
     fun writeCsv(
         file: File,

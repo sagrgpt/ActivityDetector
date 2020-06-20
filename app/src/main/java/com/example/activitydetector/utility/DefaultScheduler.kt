@@ -1,4 +1,4 @@
-package com.example.activitydetector.mvvm.common
+package com.example.activitydetector.utility
 
 import com.example.sensordatagenerator.interfaces.SchedulerProvider
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

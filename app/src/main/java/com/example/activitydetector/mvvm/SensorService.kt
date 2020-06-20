@@ -3,9 +3,12 @@ package com.example.activitydetector.mvvm
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
+import com.example.activitydetector.cache.PreferenceConstants
+import com.example.activitydetector.cache.SharedPrefManager
 import com.example.activitydetector.mvvm.common.service.BaseForegroundService
 import com.example.sensordatagenerator.DataCollector
 import com.example.sensordatagenerator.interfaces.SchedulerProvider
+import io.reactivex.rxjava3.core.Completable
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -19,26 +22,26 @@ class SensorService : BaseForegroundService() {
     @Inject
     lateinit var scheduler: SchedulerProvider
 
+    @Inject
+    lateinit var sharedPrefManager: SharedPrefManager
+
+    @Inject
+    lateinit var preferenceConstants: PreferenceConstants
+
     override fun onCreate() {
         super.onCreate()
         getComponent().inject(this)
         Timber.v("Service created")
-        dataCollector.startCollection()
+        dataCollector.startCollection(
+            sharedPrefManager.getString(preferenceConstants.activityType)
+        )
     }
 
     override fun onBind(intent: Intent?): IBinder? = binder
 
-    fun stop() {
-        dataCollector.endCollection()
+    fun closeResources(): Completable {
+        return dataCollector.endCollection()
             .subscribeOn(scheduler.computation)
-            .observeOn(scheduler.io)
-            .subscribe(
-                {
-                    Timber.v("Files successfully saved")
-                    stopSelf()
-                },
-                { Timber.e(it, "Unable to save file") }
-            )
     }
 
     inner class MyBinder : Binder() {
