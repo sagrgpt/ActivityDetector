@@ -19,11 +19,14 @@ class FileManager(
             "DataCollector"
         )
             .listFiles()
-            ?.let { fileList ->
+            ?.also { fileList ->
                 for (file in fileList) {
                     nameList.add(file.name)
                 }
+            }?.also {
+                nameList.sortDescending()
             }
+
         return nameList
     }
 

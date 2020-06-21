@@ -1,4 +1,4 @@
-package com.example.activitydetector.mvvm.sensorScreen
+package com.example.activitydetector.mvvm.sensorScreen.model
 
 data class SensorViewState(
     val isProcessing: Boolean = true,

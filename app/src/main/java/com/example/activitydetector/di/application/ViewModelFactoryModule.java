@@ -8,10 +8,10 @@ import java.util.Map;
 import javax.inject.Provider;
 
 @Module
-public class ViewModelFactoryModule {
+public abstract class ViewModelFactoryModule {
 
     @Provides
-    ViewModelFactory viewModelFactory(Map<Class<? extends ViewModel>, Provider<ViewModel>> providerMap) {
+    static ViewModelFactory viewModelFactory(Map<Class<? extends ViewModel>, Provider<ViewModel>> providerMap) {
         return new ViewModelFactory(providerMap);
     }
 

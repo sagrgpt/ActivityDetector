@@ -2,8 +2,8 @@ package com.example.activitydetector.mvvm
 
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.activitydetector.mvvm.sensorScreen.SensorViewEffects
-import com.example.activitydetector.mvvm.sensorScreen.SensorViewEvents
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorViewEffects
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorViewEvents
 import com.example.activitydetector.mvvm.sensorScreen.repository.Repository
 import com.example.activitydetector.mvvm.sensorScreen.viewmodel.SensorViewModel
 import com.google.common.truth.Truth.assertThat

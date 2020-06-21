@@ -1,4 +1,4 @@
-package com.example.activitydetector.mvvm
+package com.example.activitydetector.mvvm.sensorScreen
 
 import android.content.Intent
 import android.os.Binder

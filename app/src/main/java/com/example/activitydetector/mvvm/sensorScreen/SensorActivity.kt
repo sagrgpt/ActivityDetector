@@ -16,10 +16,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.activitydetector.R
 import com.example.activitydetector.di.ViewModelFactory
-import com.example.activitydetector.mvvm.SensorService
 import com.example.activitydetector.mvvm.adapter.FileListAdapter
 import com.example.activitydetector.mvvm.common.activity.BaseActivity
-import com.example.activitydetector.mvvm.sensorScreen.SensorViewEffects.*
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorViewEffects
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorViewEffects.*
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorViewEvents
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorViewState
 import com.example.activitydetector.mvvm.sensorScreen.viewmodel.SensorViewModel
 import com.example.activitydetector.utility.PermissionUtility
 import com.example.activitydetector.utility.ShareUtility

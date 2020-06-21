@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.activitydetector">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -8,12 +9,13 @@
 
     <application
         android:name="com.example.activitydetector.mvvm.common.application.BaseApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
         <activity
             android:name=".mvvm.sensorScreen.SensorActivity"
             android:label="Sensor Collector"
@@ -27,7 +29,7 @@
         </activity>
 
         <service
-            android:name=".mvvm.SensorService"
+            android:name=".mvvm.sensorScreen.SensorService"
             android:enabled="true"
             android:exported="false" />
 

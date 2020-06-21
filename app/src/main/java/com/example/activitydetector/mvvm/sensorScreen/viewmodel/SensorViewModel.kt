@@ -1,13 +1,13 @@
 package com.example.activitydetector.mvvm.sensorScreen.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.activitydetector.mvvm.sensorScreen.SensorResults
-import com.example.activitydetector.mvvm.sensorScreen.SensorResults.*
-import com.example.activitydetector.mvvm.sensorScreen.SensorViewEffects
-import com.example.activitydetector.mvvm.sensorScreen.SensorViewEffects.*
-import com.example.activitydetector.mvvm.sensorScreen.SensorViewEvents
-import com.example.activitydetector.mvvm.sensorScreen.SensorViewEvents.*
-import com.example.activitydetector.mvvm.sensorScreen.SensorViewState
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorResults
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorResults.*
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorViewEffects
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorViewEffects.*
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorViewEvents
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorViewEvents.*
+import com.example.activitydetector.mvvm.sensorScreen.model.SensorViewState
 import com.example.activitydetector.mvvm.sensorScreen.repository.Repository
 import com.example.activitydetector.utility.Lce
 import io.reactivex.rxjava3.core.Observable

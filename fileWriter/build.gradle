@@ -2,7 +2,7 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.4'
+    implementation Dep.rx_java
 }
 
 sourceCompatibility = "1.7"

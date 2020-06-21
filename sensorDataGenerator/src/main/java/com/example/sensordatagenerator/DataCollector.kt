@@ -5,6 +5,8 @@ import com.example.sensordatagenerator.interfaces.SchedulerProvider
 import com.example.sensordatagenerator.interfaces.SensorReader
 import com.example.sensordatagenerator.model.SensorData
 import io.reactivex.rxjava3.core.Completable
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 class DataCollector(
@@ -17,9 +19,13 @@ class DataCollector(
     private val scheduler: SchedulerProvider
 ) {
 
-    private val startTime = Calendar.getInstance().timeInMillis
-    private val accelerometerFilename = "accelerometer_$startTime.csv"
-    private val gyroscopeFilename = "gyroscope_$startTime.csv"
+    private val time = SimpleDateFormat("MM:dd hh:mm:ss aa", Locale.ROOT)
+        .let { dateFormat: DateFormat ->
+            val calendar = Calendar.getInstance()
+            dateFormat.format(calendar.time)
+        }
+    private val accelerometerFilename = "${time}_accelerometer.csv"
+    private val gyroscopeFilename = "${time}_gyroscope.csv"
     private var activityType: String = "unknown"
 
     fun startCollection(activityType: String) {

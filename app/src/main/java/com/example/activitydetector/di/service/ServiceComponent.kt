@@ -1,6 +1,6 @@
 package com.example.activitydetector.di.service
 
-import com.example.activitydetector.mvvm.SensorService
+import com.example.activitydetector.mvvm.sensorScreen.SensorService
 import dagger.Subcomponent
 
 @Subcomponent(
