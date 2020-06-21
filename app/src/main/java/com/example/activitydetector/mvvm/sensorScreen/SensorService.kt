@@ -15,16 +15,12 @@ import javax.inject.Inject
 class SensorService : BaseForegroundService() {
 
     private val binder = MyBinder()
-
     @Inject
     lateinit var dataCollector: DataCollector
-
     @Inject
     lateinit var scheduler: SchedulerProvider
-
     @Inject
     lateinit var sharedPrefManager: CacheGateway
-
     @Inject
     lateinit var preferenceConstants: PreferenceConstants
 

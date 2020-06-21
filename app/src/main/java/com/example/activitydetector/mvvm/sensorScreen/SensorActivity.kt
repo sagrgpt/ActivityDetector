@@ -37,7 +37,10 @@ import javax.inject.Inject
 
 class SensorActivity : BaseActivity() {
 
+    private val disposable = CompositeDisposable()
+    private var uiDisposable: Disposable? = null
     private var sensorService: SensorService? = null
+    private lateinit var viewModel: SensorViewModel
 
     @Inject
     lateinit var permissionUtils: PermissionUtility
@@ -50,21 +53,12 @@ class SensorActivity : BaseActivity() {
 
     @Inject
     lateinit var shareUtility: ShareUtility
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     @Inject
     lateinit var listAdapter: FileListAdapter
-
     @Inject
     lateinit var itemClickListener: PublishSubject<String>
-
-    private lateinit var viewModel: SensorViewModel
-
-    private val disposable = CompositeDisposable()
-
-    private var uiDisposable: Disposable? = null
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
@@ -118,19 +112,11 @@ class SensorActivity : BaseActivity() {
         uiDisposable = itemClickListener
             .subscribeOn(scheduler.io)
             .subscribe(
-                { fileName ->
-                    fileManager.getShareable(fileName)
-                        ?.also { shareUtility.share(it) }
-                },
-                {
-                    Timber.e(it, "Unable to share file")
-                    Toast.makeText(
-                        this,
-                        "Please try again",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            )
+                ::shareFile
+            ) {
+                Timber.e(it, "Unable to share file")
+                showToast(getString(R.string.sharable_error_toast))
+            }
     }
 
     override fun onPause() {
@@ -148,23 +134,6 @@ class SensorActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         disposable.clear()
-    }
-
-    private fun setUpListView() {
-        val layoutManager = LinearLayoutManager(
-            this,
-            LinearLayoutManager.VERTICAL,
-            false)
-        recycler_view.layoutManager = layoutManager
-
-        val dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
-        dividerItemDecoration.setDrawable(
-            ContextCompat.getDrawable(this, R.drawable.list_divider_space)!!
-        )
-        recycler_view.addItemDecoration(dividerItemDecoration)
-
-        recycler_view.adapter = listAdapter
-
     }
 
     private fun render(viewState: SensorViewState) {
@@ -195,41 +164,13 @@ class SensorActivity : BaseActivity() {
                 connectToService()
             }
             StopService -> requestServiceClosure()
-            PermissionRequired -> Toast.makeText(
-                this,
-                "Providing Permission is a must",
-                Toast.LENGTH_SHORT
-            ).show()
+            PermissionRequired -> showToast(getString(R.string.permissions_required_toast))
         }
     }
 
-    private fun populateActivitySpinner() {
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.activity_types,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            activity_spinner.adapter = adapter
-        }
-    }
-
-
-    private fun setClickListener() {
-        stop_service.setOnClickListener {
-            viewModel.processInput(SensorViewEvents.EndServiceEvent(
-                sensorService != null,
-                isExternalStorageGranted()
-            ))
-        }
-
-        start_service.setOnClickListener {
-            viewModel.processInput(
-                SensorViewEvents.StartServiceEvent(
-                    isExternalStorageGranted(),
-                    activity_spinner.selectedItem.toString()
-                ))
-        }
+    private fun shareFile(fileName: String) {
+        fileManager.getShareable(fileName)
+            ?.also { shareUtility.share(it) }
     }
 
     private fun startService() {
@@ -260,11 +201,7 @@ class SensorActivity : BaseActivity() {
                 ::serviceClosure
             ) {
                 Timber.e(it, "Error while Stopping service")
-                Toast.makeText(
-                    this,
-                    getString(R.string.service_error_toast),
-                    Toast.LENGTH_LONG
-                ).show()
+                showToast(getString(R.string.service_error_toast))
             }
     }
 
@@ -272,12 +209,53 @@ class SensorActivity : BaseActivity() {
         Timber.v("Service resources cleared.")
         sensorService?.stopSelf()
         disconnectService()
-        Toast.makeText(
-            this,
-            "Your workout has been saved",
-            Toast.LENGTH_LONG
-        ).show()
+        showToast(getString(R.string.service_end_toast_msg))
         viewModel.processInput(SensorViewEvents.ScreenLoadEvent)
+    }
+
+    private fun populateActivitySpinner() {
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.activity_types,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            activity_spinner.adapter = adapter
+        }
+    }
+
+    private fun setUpListView() {
+        val layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.VERTICAL,
+            false)
+        recycler_view.layoutManager = layoutManager
+
+        val dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
+        dividerItemDecoration.setDrawable(
+            ContextCompat.getDrawable(this, R.drawable.list_divider_space)!!
+        )
+        recycler_view.addItemDecoration(dividerItemDecoration)
+
+        recycler_view.adapter = listAdapter
+
+    }
+
+    private fun setClickListener() {
+        stop_service.setOnClickListener {
+            viewModel.processInput(SensorViewEvents.EndServiceEvent(
+                sensorService != null,
+                isExternalStorageGranted()
+            ))
+        }
+
+        start_service.setOnClickListener {
+            viewModel.processInput(
+                SensorViewEvents.StartServiceEvent(
+                    isExternalStorageGranted(),
+                    activity_spinner.selectedItem.toString()
+                ))
+        }
     }
 
     private fun isExternalStorageGranted(): Boolean {
@@ -286,6 +264,14 @@ class SensorActivity : BaseActivity() {
             WRITE_EXTERNAL_STORAGE,
             340
         )
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(
+            this,
+            message,
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
 }

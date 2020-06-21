@@ -4,6 +4,9 @@
     <string name="file_list_hint">A list of collected data set will be visible here after recording.</string>
     <string name="start_recording">Start Recording</string>
     <string name="stop_recording">Stop Recording</string>
+    <string name="service_end_toast_msg">Your sensor readings has been saved</string>
+    <string name="permissions_required_toast">You cannot start without providing the permissions</string>
+    <string name="sharable_error_toast">Please try again</string>
     <string-array name="activity_types">
         <item>Running</item>
         <item>Walking</item>
