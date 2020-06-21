@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ActivityDetector</string>
+    <string name="app_name">Sensors</string>
     <string name="service_error_toast">Sorry! Due to some error your workout was deleted</string>
     <string name="file_list_hint">A list of collected data set will be visible here after recording.</string>
     <string name="start_recording">Start Recording</string>

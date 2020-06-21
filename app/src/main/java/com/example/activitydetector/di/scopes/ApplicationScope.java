@@ -1,4 +1,4 @@
-package com.example.activitydetector.di;
+package com.example.activitydetector.di.scopes;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -9,4 +9,4 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Scope
 @Documented
 @Retention(RUNTIME)
-public @interface ActivityScope { }
+public @interface ApplicationScope { }

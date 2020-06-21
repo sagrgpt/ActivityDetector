@@ -6,7 +6,7 @@ import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 
-class DefaultScheduler : SchedulerProvider {
+class StandardScheduler : SchedulerProvider {
     override val io: Scheduler
         get() = Schedulers.io()
     override val ui: Scheduler

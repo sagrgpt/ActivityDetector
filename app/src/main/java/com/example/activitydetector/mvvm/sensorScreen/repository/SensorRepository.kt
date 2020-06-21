@@ -1,13 +1,13 @@
 package com.example.activitydetector.mvvm.sensorScreen.repository
 
+import com.example.activitydetector.cache.CacheGateway
 import com.example.activitydetector.cache.PreferenceConstants
-import com.example.activitydetector.cache.SharedPrefManager
-import com.example.activitydetector.utility.FileManager
+import com.example.activitydetector.utility.fileManager.FileResourceGateway
 
 class SensorRepository(
     private val preferenceConstants: PreferenceConstants,
-    private val sharedPrefManager: SharedPrefManager,
-    private val fileManager: FileManager
+    private val sharedPrefManager: CacheGateway,
+    private val fileManager: FileResourceGateway
 ) : Repository {
 
     override fun getServiceStatus(): Boolean {

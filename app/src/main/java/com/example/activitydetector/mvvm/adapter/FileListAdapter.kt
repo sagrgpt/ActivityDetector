@@ -3,6 +3,7 @@ package com.example.activitydetector.mvvm.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
@@ -35,10 +36,11 @@ class FileListAdapter(
 class FileListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val fileName: TextView = itemView.findViewById(R.id.file_name)
+    private val itemContainer: LinearLayout = itemView.findViewById(R.id.fileContainer)
 
     fun bind(item: String, fileClickListener: (String) -> Unit) {
         fileName.text = item
-        fileName.setOnClickListener {
+        itemContainer.setOnClickListener {
             fileClickListener.invoke(item)
         }
     }

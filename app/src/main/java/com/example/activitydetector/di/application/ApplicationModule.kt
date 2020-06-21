@@ -1,11 +1,11 @@
 package com.example.activitydetector.di.application
 
 import android.app.Application
-import com.example.activitydetector.utility.DefaultScheduler
+import com.example.activitydetector.di.scopes.ApplicationScope
+import com.example.activitydetector.utility.StandardScheduler
 import com.example.sensordatagenerator.interfaces.SchedulerProvider
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class ApplicationModule(private val application: Application) {
@@ -15,10 +15,10 @@ class ApplicationModule(private val application: Application) {
         return application
     }
 
-    @Singleton
+    @ApplicationScope
     @Provides
     fun getScheduler(): SchedulerProvider {
-        return DefaultScheduler()
+        return StandardScheduler()
     }
 
 }

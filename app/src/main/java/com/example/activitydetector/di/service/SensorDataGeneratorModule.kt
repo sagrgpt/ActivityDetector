@@ -3,7 +3,7 @@ package com.example.activitydetector.di.service
 import android.app.Application
 import com.example.activitydetector.sensors.Accelerometer
 import com.example.activitydetector.sensors.Gyroscope
-import com.example.activitydetector.utility.FileManager
+import com.example.activitydetector.utility.fileManager.FileManager
 import com.example.sensordatagenerator.DataCollector
 import com.example.sensordatagenerator.factory.GeneratorFactory
 import com.example.sensordatagenerator.interfaces.FileRetriver

@@ -7,12 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".mvvm.sensorScreen.SensorActivity">
 
-    <Button
+    <ImageButton
         android:id="@+id/stop_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="@string/stop_recording"
+        android:background="@drawable/circular_drawable"
+        android:elevation="5dp"
+        android:src="@drawable/ic_stop_white_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -20,12 +23,15 @@
         app:layout_constraintTop_toBottomOf="@+id/activity_spinner"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
+    <ImageButton
         android:id="@+id/start_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="@string/start_recording"
+        android:background="@drawable/circular_drawable"
+        android:elevation="5dp"
+        android:src="@drawable/ic_play_arrow_white_18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/stop_service"
         app:layout_constraintHorizontal_bias="0.5"
@@ -41,6 +47,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
+        android:entries="@array/activity_types"
         android:gravity="center|center_vertical"
         android:spinnerMode="dialog"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,15 +66,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_width="409dp"
-        android:layout_height="611dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="2dp"
         android:clickable="true"
         android:focusable="true"
-        android:padding="15dp"
+        android:padding="10dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,10 +1,10 @@
 package com.example.activitydetector.di.presentation
 
+import com.example.activitydetector.cache.CacheGateway
 import com.example.activitydetector.cache.PreferenceConstants
-import com.example.activitydetector.cache.SharedPrefManager
 import com.example.activitydetector.mvvm.sensorScreen.repository.Repository
 import com.example.activitydetector.mvvm.sensorScreen.repository.SensorRepository
-import com.example.activitydetector.utility.FileManager
+import com.example.activitydetector.utility.fileManager.FileResourceGateway
 import dagger.Module
 import dagger.Provides
 
@@ -15,8 +15,8 @@ object RepositoryModule {
     @Provides
     fun provideSensorRepository(
         preferenceConstants: PreferenceConstants,
-        sharedPrefManager: SharedPrefManager,
-        fileManager: FileManager
+        sharedPrefManager: CacheGateway,
+        fileManager: FileResourceGateway
     ): Repository {
         return SensorRepository(
             preferenceConstants,

@@ -2,11 +2,12 @@ package com.example.activitydetector.di.presentation
 
 import android.app.Activity
 import android.content.Context
-import com.example.activitydetector.di.ActivityScope
+import com.example.activitydetector.di.scopes.ActivityScope
 import com.example.activitydetector.mvvm.adapter.FileListAdapter
-import com.example.activitydetector.utility.FileManager
 import com.example.activitydetector.utility.PermissionUtility
 import com.example.activitydetector.utility.ShareUtility
+import com.example.activitydetector.utility.fileManager.FileManager
+import com.example.activitydetector.utility.fileManager.FileResourceGateway
 import dagger.Module
 import dagger.Provides
 import io.reactivex.rxjava3.subjects.PublishSubject
@@ -30,7 +31,7 @@ class PresentationModule(private val mActivity: Activity) {
     }
 
     @Provides
-    fun getFileManger(application: Context): FileManager {
+    fun getFileManger(application: Context): FileResourceGateway {
         return FileManager(application)
     }
 

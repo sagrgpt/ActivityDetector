@@ -21,9 +21,9 @@ import com.example.activitydetector.mvvm.adapter.FileListAdapter
 import com.example.activitydetector.mvvm.common.activity.BaseActivity
 import com.example.activitydetector.mvvm.sensorScreen.SensorViewEffects.*
 import com.example.activitydetector.mvvm.sensorScreen.viewmodel.SensorViewModel
-import com.example.activitydetector.utility.FileManager
 import com.example.activitydetector.utility.PermissionUtility
 import com.example.activitydetector.utility.ShareUtility
+import com.example.activitydetector.utility.fileManager.FileResourceGateway
 import com.example.sensordatagenerator.interfaces.SchedulerProvider
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -44,7 +44,7 @@ class SensorActivity : BaseActivity() {
     lateinit var scheduler: SchedulerProvider
 
     @Inject
-    lateinit var fileManager: FileManager
+    lateinit var fileManager: FileResourceGateway
 
     @Inject
     lateinit var shareUtility: ShareUtility
@@ -77,6 +77,7 @@ class SensorActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         getComponent().inject(this)
         viewModel = ViewModelProvider(this, viewModelFactory)
@@ -128,6 +129,11 @@ class SensorActivity : BaseActivity() {
                     ).show()
                 }
             )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        uiDisposable?.dispose()
     }
 
     override fun onStop() {

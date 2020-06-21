@@ -16,17 +16,13 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".mvvm.sensorScreen.SensorActivity"
+            android:label="Sensor Collector"
+            android:theme="@style/AppTheme.Launcher"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
-                <action android:name="android.intent.action.SEND" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="text/comma_separated_values/csv" />
             </intent-filter>
         </activity>
 
