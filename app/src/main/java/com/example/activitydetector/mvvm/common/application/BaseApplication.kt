@@ -1,9 +1,11 @@
 package com.example.activitydetector.mvvm.common.application
 
 import android.app.Application
+import com.example.activitydetector.BuildConfig
 import com.example.activitydetector.di.application.AppComponent
 import com.example.activitydetector.di.application.ApplicationModule
 import com.example.activitydetector.di.application.DaggerAppComponent
+import com.example.activitydetector.timber.CrashlyticsTree
 import timber.log.Timber
 
 class BaseApplication : Application() {
@@ -15,7 +17,9 @@ class BaseApplication : Application() {
         appComponent = DaggerAppComponent.builder()
             .applicationModule(ApplicationModule(this))
             .build()
-        Timber.plant(Timber.DebugTree())
+        if (BuildConfig.DEBUG)
+            Timber.plant(Timber.DebugTree())
+        Timber.plant(CrashlyticsTree())
     }
 
 }

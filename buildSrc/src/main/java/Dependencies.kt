@@ -11,7 +11,10 @@ object Versions {
     const val rx_android = "3.0.0"
     const val rx_java = "3.0.4"
     const val timber = "4.7.1"
-
+    const val google_service = "4.3.3"
+    const val firebase_analytics = "17.2.2"
+    const val firebase_crash = "17.1.0"
+    const val crashlytics_plugin = "2.2.0"
 }
 
 object TestVersion {
@@ -25,6 +28,7 @@ object TestVersion {
 object Dep {
     const val gradle_build = "com.android.tools.build:gradle:${Versions.gradle}"
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+    const val kotlin_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val android_core_ktx = "androidx.core:core-ktx:${Versions.core_ktx}"
     const val androidx_app_compat = "androidx.appcompat:appcompat:${Versions.app_compat}"
     const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
@@ -34,6 +38,10 @@ object Dep {
     const val rx_android = "io.reactivex.rxjava3:rxandroid:${Versions.rx_android}"
     const val rx_java = "io.reactivex.rxjava3:rxjava:${Versions.rx_java}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+    const val google_services = "com.google.gms:google-services:${Versions.google_service}"
+    const val firebase_analytics = "com.google.firebase:firebase-analytics:${Versions.firebase_analytics}"
+    const val firebase_crashlytics = "com.google.firebase:firebase-crashlytics:${Versions.firebase_crash}"
+    const val crashlytics_gradle_plugin = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlytics_plugin}"
 }
 
 object TestDep {

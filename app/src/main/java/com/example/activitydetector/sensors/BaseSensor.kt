@@ -20,7 +20,7 @@ abstract class BaseSensor(
     private val sensorManager = (context.getSystemService(Context.SENSOR_SERVICE)
         as SensorManager)
 
-    private val mSensor: Sensor = sensorManager.getDefaultSensor(sensorType)
+    private val mSensor: Sensor? = sensorManager.getDefaultSensor(sensorType)
 
     private var sensorAccuracy = Accuracy.LOW
 
@@ -33,7 +33,6 @@ abstract class BaseSensor(
             }
         }
     }
-
 
     override fun start(): Observable<SensorData> {
         sensorManager.registerListener(
