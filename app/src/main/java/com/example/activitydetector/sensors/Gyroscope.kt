@@ -3,6 +3,7 @@ package com.example.activitydetector.sensors
 import android.app.Application
 import android.hardware.Sensor
 import android.hardware.SensorEvent
+import com.example.sensordatagenerator.model.SensorType
 
 class Gyroscope(
     application: Application
@@ -14,7 +15,7 @@ class Gyroscope(
     override fun onSensorChanged(event: SensorEvent?) {
         event?.let {
             if (it.sensor.isGyroscope()) {
-                it.convertToSensorData()
+                it.convertToSensorData(SensorType.GYROSCOPE)
                     .also { data ->
                         publishSubject.onNext(data)
                     }
@@ -25,5 +26,4 @@ class Gyroscope(
     private fun Sensor.isGyroscope(): Boolean {
         return type == sensorType
     }
-
 }

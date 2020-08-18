@@ -5,9 +5,11 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import com.example.sensordatagenerator.interfaces.SensorReader
+import com.example.activitydetector.sensors.interfaces.SensorRemote
+import com.example.sensordatagenerator.interfaces.SensorListener
 import com.example.sensordatagenerator.model.Accuracy
 import com.example.sensordatagenerator.model.SensorData
+import com.example.sensordatagenerator.model.SensorType
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.PublishSubject
 import timber.log.Timber
@@ -15,10 +17,12 @@ import timber.log.Timber
 abstract class BaseSensor(
     context: Context,
     val sensorType: Int
-) : SensorReader, SensorEventListener {
+) : SensorRemote, SensorListener, SensorEventListener {
 
     private val sensorManager = (context.getSystemService(Context.SENSOR_SERVICE)
         as SensorManager)
+
+    private var isSensorRunning: Boolean = false
 
     private val mSensor: Sensor? = sensorManager.getDefaultSensor(sensorType)
 
@@ -34,29 +38,50 @@ abstract class BaseSensor(
         }
     }
 
-    override fun start(): Observable<SensorData> {
-        sensorManager.registerListener(
-            this,
-            mSensor,
-            SensorManager.SENSOR_DELAY_GAME
-        )
-        return publishSubject
+    override fun start() {
+        if (isSensorRunning)
+            throw IllegalStateException("Sensor has already started")
+        else
+            registerSensor()
     }
 
     override fun stop() {
-        sensorManager.unregisterListener(this)
-        Timber.v("Listener Unregistered")
-        publishSubject.onComplete()
+        if (isSensorRunning) {
+            unregisterSensor()
+            publishSubject.onComplete()
+        } else throw IllegalStateException("Sensor never started")
     }
 
-    internal fun SensorEvent.convertToSensorData(): SensorData {
+    override fun listen(): Observable<SensorData> {
+        return publishSubject
+    }
+
+    internal fun SensorEvent.convertToSensorData(
+        sensorType: SensorType
+    ): SensorData {
         return SensorData(
             x = values[0],
             y = values[1],
             z = values[2],
             timestamp = timestamp,
-            accuracy = sensorAccuracy
+            accuracy = sensorAccuracy,
+            type = sensorType
         )
+    }
+
+    private fun registerSensor() {
+        sensorManager.registerListener(
+            this,
+            mSensor,
+            SensorManager.SENSOR_DELAY_GAME
+        )
+        isSensorRunning = true
+    }
+
+    private fun unregisterSensor() {
+        sensorManager.unregisterListener(this)
+        Timber.v("Listener Unregistered")
+        isSensorRunning = false
     }
 
     private fun getAccuracy(accuracy: Int): Accuracy = when (accuracy) {

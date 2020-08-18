@@ -4,6 +4,7 @@ import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import com.example.sensordatagenerator.model.SensorData
+import com.example.sensordatagenerator.model.SensorType
 
 class Accelerometer(
     context: Context
@@ -18,7 +19,7 @@ class Accelerometer(
     override fun onSensorChanged(event: SensorEvent?) {
         event?.let {
             if (it.sensor.isAccelerometer()) {
-                it.convertToSensorData()
+                it.convertToSensorData(SensorType.ACCELEROMETER)
                     .lowPassFilter()
                     .also { data ->
                         publishSubject.onNext(data)

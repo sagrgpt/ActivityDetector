@@ -6,18 +6,18 @@ import com.example.sensordatagenerator.DataRecorder
 import com.example.sensordatagenerator.DataWriter
 import com.example.sensordatagenerator.interfaces.FileRetriver
 import com.example.sensordatagenerator.interfaces.SchedulerProvider
-import com.example.sensordatagenerator.interfaces.SensorReader
+import com.example.sensordatagenerator.interfaces.SensorListener
 
 class GeneratorFactory(
-    private val accelerometerReader: SensorReader,
-    private val gyroscopeReader: SensorReader,
+    private val accelerometerListener: SensorListener,
+    private val gyroscopeListener: SensorListener,
     private val fileManager: FileRetriver,
     private val scheduler: SchedulerProvider) {
 
     fun buildDataCollector(): DataCollector {
         return DataCollector(
-            accelerometerReader,
-            gyroscopeReader,
+            accelerometerListener,
+            gyroscopeListener,
             buildDataRecorder(),
             buildDataRecorder(),
             fileManager,

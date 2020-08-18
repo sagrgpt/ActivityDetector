@@ -38,6 +38,7 @@ dependencies {
     implementation Dep.androidx_app_compat
     implementation Dep.androidx_constraint_layout
     implementation Dep.androidx_recycler_view
+    implementation Dep.tensor_flow_lite
 
     testImplementation TestDep.junit
     testImplementation TestDep.mockito_core

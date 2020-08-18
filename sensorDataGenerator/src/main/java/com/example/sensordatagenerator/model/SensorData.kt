@@ -6,5 +6,11 @@ data class SensorData(
     val z: Float = 0f,
     val timestamp: Long,
     val accuracy: Accuracy = Accuracy.UNKNOWN,
-    val activityType: String = ""
+    val activityType: String = "",
+    val type: SensorType
 )
+
+enum class SensorType {
+    GYROSCOPE,
+    ACCELEROMETER
+}

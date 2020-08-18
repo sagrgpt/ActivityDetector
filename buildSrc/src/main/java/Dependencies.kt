@@ -15,6 +15,7 @@ object Versions {
     const val firebase_analytics = "17.2.2"
     const val firebase_crash = "17.1.0"
     const val crashlytics_plugin = "2.2.0"
+    const val tensor_flow_version = "1.13.1"
 }
 
 object TestVersion {
@@ -42,6 +43,7 @@ object Dep {
     const val firebase_analytics = "com.google.firebase:firebase-analytics:${Versions.firebase_analytics}"
     const val firebase_crashlytics = "com.google.firebase:firebase-crashlytics:${Versions.firebase_crash}"
     const val crashlytics_gradle_plugin = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlytics_plugin}"
+    const val tensor_flow_lite = "org.tensorflow:tensorflow-lite:${Versions.tensor_flow_version}"
 }
 
 object TestDep {

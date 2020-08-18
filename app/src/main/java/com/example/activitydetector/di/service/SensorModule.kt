@@ -3,6 +3,8 @@ package com.example.activitydetector.di.service
 import android.app.Application
 import com.example.activitydetector.sensors.Accelerometer
 import com.example.activitydetector.sensors.Gyroscope
+import com.example.activitydetector.sensors.SensorStateController
+import com.example.activitydetector.sensors.interfaces.UniversalRemote
 import dagger.Module
 import dagger.Provides
 
@@ -11,13 +13,22 @@ object SensorModule {
 
     @JvmStatic
     @Provides
-    fun getAccelerometerReader(application: Application): Accelerometer {
+    fun getAccelerometer(application: Application): Accelerometer {
         return Accelerometer(application)
     }
 
     @JvmStatic
     @Provides
-    fun getGyroscopeReader(application: Application): Gyroscope {
+    fun getGyroscope(application: Application): Gyroscope {
         return Gyroscope(application)
+    }
+
+    @JvmStatic
+    @Provides
+    fun getUniversalRemote(accelerometer: Accelerometer, gyroscope: Gyroscope): UniversalRemote {
+        return SensorStateController(
+            accelerometer,
+            gyroscope
+        )
     }
 }
