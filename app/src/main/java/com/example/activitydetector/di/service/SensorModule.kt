@@ -1,6 +1,7 @@
 package com.example.activitydetector.di.service
 
 import android.app.Application
+import com.example.activitydetector.di.scopes.ServiceScope
 import com.example.activitydetector.sensors.Accelerometer
 import com.example.activitydetector.sensors.Gyroscope
 import com.example.activitydetector.sensors.SensorStateController
@@ -11,12 +12,14 @@ import dagger.Provides
 @Module
 object SensorModule {
 
+    @ServiceScope
     @JvmStatic
     @Provides
     fun getAccelerometer(application: Application): Accelerometer {
         return Accelerometer(application)
     }
 
+    @ServiceScope
     @JvmStatic
     @Provides
     fun getGyroscope(application: Application): Gyroscope {

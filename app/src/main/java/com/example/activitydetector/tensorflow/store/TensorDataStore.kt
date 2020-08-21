@@ -4,42 +4,39 @@ import com.example.sensordatagenerator.model.SensorData
 import com.example.sensordatagenerator.model.SensorType
 
 class TensorDataStore {
-    val hashMap = hashMapOf<Long, TensorData>()
+    private var accelerometerList = mutableListOf<SensorData>()
+    private var gyroscopeList = mutableListOf<SensorData>()
 
     fun record(sensorData: SensorData) {
         when (sensorData.type) {
-            SensorType.ACCELEROMETER -> addAccelerometerValues(sensorData)
-            SensorType.GYROSCOPE -> addGyroValues(sensorData)
+            SensorType.ACCELEROMETER -> accelerometerList.add(sensorData)
+            SensorType.GYROSCOPE -> gyroscopeList.add(sensorData)
         }
     }
 
-    private fun addAccelerometerValues(data: SensorData) {
-        hashMap[data.timestamp] = hashMap[data.timestamp]?.copy(
-            x = data.x,
-            y = data.y,
-            z = data.z
-        ) ?: TensorData(
-            data.x,
-            data.y,
-            data.z,
-            0.0F,
-            0.0F,
-            0.0F
-        )
+    fun reset() {
+        accelerometerList.clear()
+        gyroscopeList.clear()
     }
 
-    private fun addGyroValues(data: SensorData) {
-        hashMap[data.timestamp] = hashMap[data.timestamp]?.copy(
-            x2 = data.x,
-            y2 = data.y,
-            z2 = data.z
-        ) ?: TensorData(
-            0.0F,
-            0.0F,
-            0.0F,
-            data.x,
-            data.y,
-            data.z
-        )
+    fun getTensorDataList(): List<TensorData> {
+        val size = accelerometerList.size
+            .takeIf { it <= gyroscopeList.size }
+            ?: gyroscopeList.size
+
+        return mutableListOf<TensorData>()
+            .apply {
+                for (i in 0 until size) {
+                    add(TensorData(
+                        x = accelerometerList[i].x,
+                        y = accelerometerList[i].y,
+                        z = accelerometerList[i].z,
+                        x2 = gyroscopeList[i].x,
+                        y2 = gyroscopeList[i].y,
+                        z2 = gyroscopeList[i].z
+                    ))
+                }
+            }
+
     }
 }

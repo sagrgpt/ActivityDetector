@@ -25,9 +25,9 @@ class CnnClient(
     }
 
     fun predict(dataList: List<TensorData>): Int {
-        val input = arrayOf<Array<Float>>()
+        var input = arrayOf<Array<Float>>()
         for (i in dataList.indices) {
-            input[i] = arrayOf(
+            input += arrayOf(
                 dataList[i].x,
                 dataList[i].y,
                 dataList[i].z,
@@ -36,9 +36,9 @@ class CnnClient(
                 dataList[i].z2
             )
         }
-        val output = arrayOf<Int>()
+        val output = arrayOf<Array<Int>>()
         tfLite?.run(input, output)
-        return output[0]
+        return output[0][0]
     }
 
     private fun loadModel() {

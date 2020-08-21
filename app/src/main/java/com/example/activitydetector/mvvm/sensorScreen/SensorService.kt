@@ -7,6 +7,7 @@ import com.example.activitydetector.cache.CacheGateway
 import com.example.activitydetector.cache.PreferenceConstants
 import com.example.activitydetector.mvvm.common.service.BaseForegroundService
 import com.example.activitydetector.sensors.interfaces.UniversalRemote
+import com.example.activitydetector.tensorflow.ActivityDetector
 import com.example.sensordatagenerator.DataCollector
 import com.example.sensordatagenerator.interfaces.SchedulerProvider
 import io.reactivex.rxjava3.core.Completable
@@ -32,6 +33,9 @@ class SensorService : BaseForegroundService() {
     @Inject
     lateinit var remote: UniversalRemote
 
+    @Inject
+    lateinit var activityDetector: ActivityDetector
+
     override fun onCreate() {
         super.onCreate()
         getComponent().inject(this)
@@ -40,12 +44,14 @@ class SensorService : BaseForegroundService() {
         dataCollector.startCollection(
             sharedPrefManager.getString(preferenceConstants.activityType)
         )
+        activityDetector.monitor()
     }
 
     override fun onBind(intent: Intent?): IBinder? = binder
 
     fun closeResources(): Completable {
         remote.shutdown()
+        activityDetector.shutdown()
         return dataCollector.endCollection()
             .subscribeOn(scheduler.computation)
     }
